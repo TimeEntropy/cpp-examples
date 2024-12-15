@@ -1,4 +1,5 @@
 #include <functional>
+#define IMPORT_DLL
 #include "dynm/dynlib.hpp"
 #include "mod1/mod.hpp"
 #include "mod2/mod.hpp"
@@ -14,16 +15,16 @@ int main(int argc, char* argv[]) {
 	using loadfunc1_t = mod1::module*(*)();
 	using loadfunc2_t = mod2::module*(*)();
 	loadfunc1_t load1 = reinterpret_cast<loadfunc1_t>(lib1.findC("load_mod"));
-	loadfunc2_t load2 = reinterpret_cast<loadfunc2_t>(lib2.findC("load_mod"));
+	// loadfunc2_t load2 = reinterpret_cast<loadfunc2_t>(lib2.findC("load_mod"));
 
 	mod1::module* ins1 = load1();
-	mod2::module* ins2 = load2();
+	mod2::module* ins2 = new mod2::module;
 
 	ins1->say("test");
-	ins2->say("test");
+	// ins2->say("test");
 
 	// ins1->hello();
-	// ins2->hi();
+	ins2->hi();
 
 	delete ins1;
 	delete ins2;

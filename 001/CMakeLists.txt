@@ -18,11 +18,11 @@ project(DynamicModuleLoad CXX)
 # targets
 add_executable(${MAIN_TARGET_NAME} ${MAIN_SRC})
 add_library   (${DYNM_TARGET_NAME} STATIC ${DYNM_SRC})
-add_library   (${MOD1_TARGET_NAME} SHARED ${MOD1_SRC})
+add_library   (${MOD1_TARGET_NAME} MODULE ${MOD1_SRC})
 add_library   (${MOD2_TARGET_NAME} SHARED ${MOD2_SRC})
 
 include_directories(src)
-target_link_libraries(${MAIN_TARGET_NAME} ${DYNM_TARGET_NAME})
+target_link_libraries(${MAIN_TARGET_NAME} ${DYNM_TARGET_NAME} ${MOD2_TARGET_NAME})
 add_dependencies(
 	${DYNM_TARGET_NAME}
 	${MOD1_TARGET_NAME}

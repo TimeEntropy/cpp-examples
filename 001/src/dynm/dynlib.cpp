@@ -24,7 +24,28 @@ namespace dynlib {
 	}
 
 }
-
 #else
-	#error unsupport for non-windows platform
+#include <dlfcn.h>
+
+namespace dynlib {
+
+	void library::load(const std::string& path) {
+		handle = dlopen(path.c_str(), RTLD_LAZY);
+		if (!handle)
+			throw std::runtime_error("failed to get lib handle!");
+	}
+
+	void library::free() {
+		FreeLibrary((HINSTANCE)handle);
+	}
+
+	void* library::findC(const std::string& symbol) {
+		auto found = dlsym(handle, symbol.c_str());
+		if(!found)
+			throw std::runtime_error("the symbol is not found!");
+		return (void*)found;
+	}
+
+}
+
 #endif

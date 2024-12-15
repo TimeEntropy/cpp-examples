@@ -2,11 +2,6 @@
 #include <string>
 
 namespace dynlib {
-	
-	class module {
-	public:
-		virtual void say(const std::string& words) = 0;
-	};
 
 	class library {
 	public:
