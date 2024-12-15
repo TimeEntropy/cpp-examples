@@ -4,7 +4,7 @@
 namespace mod1 {
 
 	extern "C" {
-		module* load_mod1() {
+		module* load_mod() {
 			return new module();
 		}
 	}

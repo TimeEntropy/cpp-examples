@@ -1,4 +1,4 @@
-#include "main/dynlib.hpp"
+#include "dynm/dynlib.hpp"
 
 namespace mod2 {
 
